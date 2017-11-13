@@ -6,6 +6,8 @@ cur = db.cursor()
 
 cur.execute("INSERT INTO user_settings (setting_id, location, modules) VALUES(100, 'Ottawa', 2)")
 
+cur.execute("UPDATE user_settings")
+
 db.commit()
 
 result = cur.fetchall()
