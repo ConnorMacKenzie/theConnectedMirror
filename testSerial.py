@@ -10,7 +10,8 @@ while 1:
         print("Close");
         print(ser.readline());
         if onOff == 0:
-            os.system("tvservice -o");
+            os.system("tvservice -p");
+            os.system("xset -display :0 dpms force on");
             ser.write('1');
             onOff = 1;
 
@@ -18,8 +19,7 @@ while 1:
         print("Far");
         print(ser.readline());
         if onOff == 1:
-            os.system("tvservice -p");
-            os.system("xset -display :0 dpms force on");
+            os.system("tvservice -o");
             ser.write('0');
             onOff = 0;
     else:
