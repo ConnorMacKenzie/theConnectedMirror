@@ -6,13 +6,15 @@ cur = db.cursor()
 
 cur.execute("INSERT INTO user_settings (setting_id, location, modules) VALUES(100, 'Ottawa', 2)")
 
-db.commit()
+cur.execute("SELECT * FROM user_settings WHERE setting_id = 100")
 
-result = cur.fetchall()
-
-db.commit()
+result = cur.fetchone()
 
 for row in result:
     print row
 
 cur.execute("DELETE FROM user_settings WHERE setting_id = 100")
+
+db.commit()
+
+db.close()

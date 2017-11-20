@@ -1,20 +1,32 @@
+
 import MySQLdb
 
 db = MySQLdb.connect("localhost", "root", "mysql", "connected_mirror")
 
 cur = db.cursor()
 
-cur.execute("INSERT INTO led_settings (setting_id, location, modules) VALUES(100, 'Ottawa', 2)")
+cur.execute("INSERT INTO led_settings (led_id, red, green, blue, white, brightness) VALUES(100, 0, 0, 0, 0, 0)")
 
-cur.execute("UPDATE led_settings")
+cur.execute("SELECT * FROM led_settings WHERE led_id = 100")
 
-db.commit()
-
-result = cur.fetchall()
-
-db.commit()
+result = cur.fetchone()
 
 for row in result:
     print row
 
-cur.execute("DELETE FROM led_settings WHERE setting_id = 100")
+print 'UPDATING ROW'
+
+cur.execute("UPDATE led_settings SET red = 2, blue = 25 WHERE led_id = 100")
+
+cur.execute("SELECT * FROM led_settings WHERE led_id = 100")
+
+result = cur.fetchone()
+
+for row in result:
+    print row
+
+cur.execute("DELETE FROM led_settings WHERE led_id = 100")
+
+db.commit()
+
+db.close()
