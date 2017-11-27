@@ -59,10 +59,10 @@ class Server:
     print("Starting UDP Server")
 
     #initialize socket addresses and ports
-    localName = raw_input("Input Local Address: ")
-    localPort = int(input("Input Local Port: "))
-    remoteName = raw_input("Input Remote Address: ")
-    remotePort = int(input("Input Remote Port: "))
+    localName = 'localhost'
+    localPort = 23
+    remoteName = 'localhost'
+    remotePort = 22
 
     #Initialize the UDP socket
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
