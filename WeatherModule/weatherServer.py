@@ -1,3 +1,11 @@
+'''
+weatherServer.py
+GIT URL: https://github.com/ConnorMacKenzie/theConnectedMirror/WeatherModule/weatherServer.py
+Version 3.0
+Added UDP communication along with specific requests
+November 26th, 2017
+'''
+
 import forecastio, json, StringIO, socket, sys, time
 
 

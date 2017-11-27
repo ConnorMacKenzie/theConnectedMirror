@@ -1,3 +1,11 @@
+'''
+weatherClient.py
+GIT URL: https://github.com/ConnorMacKenzie/theConnectedMirror/WeatherModule/weatherClient.py
+Version 3.0
+Added UDP communication along with specific requests
+November 26th, 2017
+'''
+
 import socket, sys, time, json
 
 localName = raw_input("Input Local Address: ")
