@@ -8,39 +8,47 @@ November 26th, 2017
 
 import socket, sys, time, json
 
-class Client():
+class client:
 
-    def __init__(self, local = , localport, remote, remoteport):
+    #initializes socket addresses and ports
+    #localName = raw_input("Input Local Address: ")
+    #localPort = int(input("Input Local Port: "))
+    #remoteName = raw_input("Input Remote Address: ")
+    #remotePort = int(input("Input Remote Port: "))
 
-        #initializes socket addresses and ports
-        self.localName = local
-        self.localPort = localport
-        self.remoteName = remote
-        self.remotePort = remoteport
-
-        #initializes sockets
+    #initializes sockets
+    def initialize(self, localName, localPort, remoteName, remotePort):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.localAddress = (self.localName, self.localPort)
-        self.remoteAddress = (self.remoteName, self.remotePort)
+        self.localAddress = (localName, localPort)
+        self.remoteAddress = (remoteName, remotePort)
         self.s.bind(self.localAddress)
+        return self.s.getsockname()
 
-    def sendReceive(self, field):
+
+    def closeConnection(self):
+        self.s.close()
+
+
+    def pullRequest(self, inputString):
 
         notSent = True
-
+        bites = 0
         #while nothing is sent, loop
         while notSent:
             #print ("Enter non-null weather pull request: ")
             #sets the string to be sent as the next line in the terminal
-            request = field
+            request = inputString
             if not len(request):
                 break
             #sends the next line in the terminal to the server socket
-            self.s.sendto(request.encode('utf-8'), self.remoteAddress)
+            bites = self.s.sendto(request.encode('utf-8'), self.remoteAddress)
             notSent = False
 
+        return bites
 
 
+
+    def startListening(self):
         notRec = True
         #while nothing is received, loop
         while notRec:
@@ -56,4 +64,4 @@ class Client():
         #decodes json string into python dictionary to enable manipulation and access
         data = json.loads(jsonData)
 
-        return data.get(field)
+        return data
