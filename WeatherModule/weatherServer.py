@@ -68,21 +68,22 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 localAddress = (localName, localPort)
 remoteAddress = (remoteName, remotePort)
 s.bind(localAddress)
-notRec = True
+while True:
+    notRec = True
 
-#while nothing is recieved, loop
-while notRec:
-    print("Waiting for Request on port %d : press Ctrl-C to stop" % localPort)
+    #while nothing is recieved, loop
+    while notRec:
+        print("Waiting for Request on port %d : press Ctrl-C to stop" % localPort)
 
-    #recieves data from client and stores it in buf
-    buf, address = s.recvfrom(2048)
-    if not len(buf):
-        break
-    #displays data received for validation
-    print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
-    notRec = False
+        #recieves data from client and stores it in buf
+        buf, address = s.recvfrom(2048)
+        if not len(buf):
+            break
+        #displays data received for validation
+        print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
+        notRec = False
 
-#sends JSON data on different free port encoded in utf-8
-s.sendto(jsonData.encode('utf-8'), remoteAddress)
-#closes the socket
+    #sends JSON data on different free port encoded in utf-8
+    s.sendto(jsonData.encode('utf-8'), remoteAddress)
+    #closes the socket
 s.close()
