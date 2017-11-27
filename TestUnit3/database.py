@@ -1,6 +1,8 @@
 import MySQLdb
 import json
 
+#Connor Mackenzie
+
 #Class of fucntions for database interactions
 class database:
 
@@ -13,7 +15,11 @@ class database:
         result = cur.fetchone()
         db.commit()
         db.close()
-        data = [['led_id', result[0]], ['red', result[1]], ['green', result[2]], ['blue', result[3]], ['white', result[4]], ['brightness', result[5]]]
+
+        if result == None:
+            data = ['Bad','Data']
+        else:
+            data = [['led_id', result[0]], ['red', result[1]], ['green', result[2]], ['blue', result[3]], ['white', result[4]], ['brightness', result[5]]]
         jsonData = json.dumps(data)
         return jsonData
 
@@ -44,7 +50,11 @@ class database:
         result = cur.fetchone()
         db.commit()
         db.close()
-        data = [['setting_id', result[0]], ['location', result[1]], ['modules', result[2]]]
+
+        if result == None:
+            data = ['Bad','Data']
+        else:
+            data = [['setting_id', result[0]], ['location', result[1]], ['modules', result[2]]]
         jsonData = json.dumps(data)
         return jsonData
 
