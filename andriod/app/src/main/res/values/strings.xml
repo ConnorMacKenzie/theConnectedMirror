@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ConnectedMirror</string>
+    <string name="title">The Connected Mirror</string>
+    <string name="ledSettings">LED Colour</string>
+    <string name="Red">Red</string>
+    <string name="Green">Green</string>
+    <string name="Blue">Blue</string>
+    <string name="White">White</string>
+    <string name="Bright">Brightness</string>
+</resources>
