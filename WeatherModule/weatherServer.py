@@ -8,6 +8,7 @@ November 26th, 2017
 
 import forecastio, json, StringIO, socket, sys, time
 
+
 #when initialized, this class gets information on curent weather
 class getCurrentData:
 
@@ -42,6 +43,9 @@ class getCurrentData:
     def serializable(self):
         return self.__dict__
 
+
+
+'''
 #passed to the json encoder to check and use the serializing method if found, else returns an error
 class encoderClass(json.JSONEncoder):
     def default(self,o):
@@ -87,3 +91,4 @@ while True:
     s.sendto(jsonData.encode('utf-8'), remoteAddress)
     #closes the socket
 s.close()
+'''
