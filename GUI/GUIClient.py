@@ -1,5 +1,5 @@
 import Tkinter as tk
-import time, socket, sys, time, json, GUIServer
+import time, socket, sys, time, json
 
 class Client():
 
@@ -22,15 +22,11 @@ class Client():
         #print ("Enter non-null weather pull request: ")
         #sets the string to be sent as the next line in the terminal
 
-        if not len(field):
-            break
         #sends the next line in the terminal to the server socket
         self.s.sendto(field.encode('utf-8'), self.remoteAddress)
 
         #receives data from server and stores in buf
-        buf, address = self.s.recvfrom(2048)
-        if not len(buf):
-            break
+        buf, address = self.s.recvfrom(100000)
         #decodes utf-8 data to store json string
         jsonData = buf.decode('utf-8')
 
@@ -44,8 +40,6 @@ class GUI():
 
     def __init__(self):
 
-        server = GUIServer.serv()
-        server.start()
         font = "Courier"
         #font = "Nidus Sans"
         self.root = tk.Tk()
@@ -54,17 +48,18 @@ class GUI():
         self.client = Client()
         self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
         self.weatherLabel = tk.Label(self.root, text = "", font = (font, 40), background = 'black', foreground = 'white')
-        self.newsLabel = tk.Label(self.root, text = "", font = (font, 40), background = 'black', foreground = 'white')
+        self.newsLabel = tk.Label(self.root, text = "", font = (font, 10), background = 'black', foreground = 'white')
         self.clockLabel.pack(side = 'right')
         self.weatherLabel.pack(side = 'left')
-        self.newsLabel.pack(side = "top")
+        self.newsLabel.pack(side = 'top')
         self.updateAll()
+        self.updateClock()
         self.root.mainloop()
 
     def updateClock(self):
         timeString = time.strftime('%H:%M:%S')
         self.clockLabel.configure(text=timeString)
-        self.root.after(1000, lambda: self.updateclockLabel())
+        self.root.after(1000, lambda: self.updateClock())
 
     def updateWeather(self):
         weatherData = self.client.recieveData('weather')
@@ -73,7 +68,12 @@ class GUI():
 
     def updateNews(self):
         newsData = self.client.recieveData('news')
-        newsString = weatherData.get('title')
+        articles = newsData.get('articles')
+        newsString = ''
+        for item in articles:
+            newsString += item['title']
+            newsString += "\n"
+        #newsString = newsData.get('title')
         self.newsLabel.configure(text = newsString)
 
     def updateAll(self):

@@ -52,5 +52,9 @@ class serv:
                 jsonNews = json.dumps(newsData, cls = encoderClass)
 
                 s.sendto(jsonNews.encode('utf-8'), remoteAddress)
+                
         #closes the socket
         s.close()
+
+server = serv()
+server.start()
