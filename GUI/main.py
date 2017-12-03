@@ -2,6 +2,7 @@ import json, socket, time, sys, speechMain, os
 from timeit import default_timer
 from multiprocessing import Process
 import serial
+from threading import Timer
 
 
 class MainClient():
@@ -22,23 +23,19 @@ class MainClient():
                 		onOff = 1;
 
         	elif int(ser.readline())>=75:
-			if(start is None):
-				start = default_timer()
-			
-			
-			diff = default_timer - start
-			floatdiff = float(diff)
-			if(floatdiff >= 5.0):
-            			if onOff == 1:
-                			os.system("tvservice -o");
-                			ser.write('0');
-                			onOff = 0;
-					start = None
+			t = Timer(5.0, lcdOff)
+            			
         	else:
             		pass;
 
-
-    
+        def lcdOff(self):
+                if int(ser.readline())>=75:
+                        if onOff == 1:
+                                os.system("tvservice -o");
+                                ser.write('0');
+                                onOff = 0;
+                                start = None
+            
 ##    onOff = 1;
 ##
 ##
