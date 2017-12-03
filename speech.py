@@ -8,10 +8,13 @@ class Speech():
     @staticmethod
     def record():
         r = sr.Recognizer()
+        r.energy_threshhold = 2000
         with sr.Microphone() as source:
-            print("Say something!")
-            audio = r.listen(source)
-            
+            print 'say something'
+            try:
+                audio = r.listen(source, timeout = 5)
+            except sr.WaitTimeoutError:
+                return "Audio Timeout"
         try:
             return r.recognize_google(audio).lower()
         except sr.UnknownValueError:
