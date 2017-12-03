@@ -25,7 +25,7 @@ class Database:
 
     #Insert new row into led_settings table given data for all columns
     @staticmethod
-    def setLed(led_id, r, g, b, w, bri):
+    def setLed(led_id, r, g, b):
         db = MySQLdb.connect("localhost", "root", "mysql", "connected_mirror")
         cur = db.cursor()
         cur.execute("INSERT INTO led_settings (led_id, red, green, blue) VALUES(" + str(led_id) + "," + str(r) + "," + str(g) + "," + str(b) + ")")
@@ -34,7 +34,7 @@ class Database:
 
     #Update row in led_settings table given led_id and data for columns
     @staticmethod
-    def updateLed(led_id, r, g, b, w, bri):
+    def updateLed(led_id, r, g, b):
         db = MySQLdb.connect("localhost", "root", "mysql", "connected_mirror")
         cur = db.cursor()
         cur.execute("UPDATE led_settings SET red = " + str(r) + ", green = " + str(g) + ", blue = " + str(b) + " WHERE led_id = " + str(led_id))        
