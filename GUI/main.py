@@ -1,4 +1,4 @@
-import json, socket, time, sys, GUIClient, speechMain 
+import json, socket, time, sys, GUIClient, speechMain, os 
 from multiprocessing import Process
 import serial
 
@@ -6,7 +6,7 @@ import serial
 class MainClient():
 
     ser = serial.Serial('/dev/ttyACM0', 9600)
-<<<<<<< HEAD
+
     onOff = 1;
 
 
@@ -26,8 +26,8 @@ class MainClient():
         else:
             pass;
 
-=======
-    print ser.readline()
+
+    
 ##    onOff = 1;
 ##
 ##
@@ -48,10 +48,7 @@ class MainClient():
 ##        pass;
 
         
-Process(target= GUIClient.GUI()).start()
-while 1:       
-        Process(target= MainClient()).start()
->>>>>>> 49685d49eb587cac01385979a47d2ec7028fb4ff
+
         
 main = MainClient()   
 
