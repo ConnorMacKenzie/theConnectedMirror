@@ -1,4 +1,4 @@
-import json, socket, time, sys, GUIClient, speechMain, os 
+import json, socket, time, sys, speechMain, os 
 from multiprocessing import Process
 import serial
 
