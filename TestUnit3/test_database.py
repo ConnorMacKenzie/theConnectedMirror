@@ -9,7 +9,7 @@ data2 = [['setting_id', 1], ['location', 'Ottawa'], ['modules', 2]]
 data3 = ['Bad', 'Data']
 
 #pass database class a user id and led id to get JSON info on both back
-db = database.database()
+db = database.Database()
 test1 = db.getLed(100)
 test2 = db.getUser(1)
 

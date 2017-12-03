@@ -4,7 +4,7 @@ import json
 #Connor Mackenzie
 
 #Class of fucntions for database interactions
-class database:
+class Database:
 
     #get row for led_settings table given led_id, return in JSON format
     @staticmethod

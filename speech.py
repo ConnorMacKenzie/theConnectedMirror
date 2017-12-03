@@ -3,7 +3,7 @@ import speech_recognition as sr
 #url = {'https://speech.googleapis.com/$discovery/rest?version=v1'
 #       'key=AIzaSyD4sNrpPT1RFuhMxpfIF8LK2E8uBgDYPTg'}
 
-class speech():
+class Speech():
 
     @staticmethod
     def record():
@@ -13,7 +13,7 @@ class speech():
             audio = r.listen(source)
             
         try:
-            return r.recognize_google(audio)
+            return r.recognize_google(audio).lower()
         except sr.UnknownValueError:
             return "Google Speech Recognition could not understand audio"
         except sr.RequestError as e:
