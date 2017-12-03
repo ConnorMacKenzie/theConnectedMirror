@@ -1,4 +1,4 @@
-import json, socket, time, sys, GUIClient, speechMain, 
+import json, socket, time, sys, GUIClient, speechMain 
 from multiprocessing import Process
 import serial
 
@@ -27,7 +27,7 @@ class MainClient():
 
         
 Process(target= GUIClient.GUI()).start()
- while 1:       
+while 1:       
         Process(target= MainClient()).start()
         
    
