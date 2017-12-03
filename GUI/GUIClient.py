@@ -40,8 +40,8 @@ class GUI():
 
     def __init__(self):
 
-        font = "Courier"
-        #font = "Nidus Sans"
+        #font = "Courier"
+        font = "Nidus Sans"
         self.root = tk.Tk()
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
@@ -49,9 +49,9 @@ class GUI():
         self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
         self.weatherLabel = tk.Label(self.root, text = "", font = (font, 40), background = 'black', foreground = 'white')
         self.newsLabel = tk.Label(self.root, text = "", font = (font, 10), background = 'black', foreground = 'white')
-        self.clockLabel.pack(side = 'right')
+        self.clockLabel.pack(side = 'top')
         self.weatherLabel.pack(side = 'left')
-        self.newsLabel.pack(side = 'top')
+        self.newsLabel.pack(side = 'right')
         self.updateAll()
         self.updateClock()
         self.root.mainloop()
