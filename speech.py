@@ -8,7 +8,7 @@ class speech():
     @staticmethod
     def record():
         r = sr.Recognizer()
-        with sr.Microphone(device_index = 1) as source:
+        with sr.Microphone() as source:
             print("Say something!")
             audio = r.listen(source)
             

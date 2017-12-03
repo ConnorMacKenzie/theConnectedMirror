@@ -4,7 +4,7 @@ import database
 #Connor MacKenzie
 
 #expected data to be returned from database class
-data1 = [['led_id', 100], ['red', 10], ['green', 10], ['blue', 10], ['white', 0], ['brightness', 10]]
+data1 = [['led_id', 100], ['red', 10], ['green', 10], ['blue', 10]]
 data2 = [['setting_id', 1], ['location', 'Ottawa'], ['modules', 2]]
 data3 = ['Bad', 'Data']
 

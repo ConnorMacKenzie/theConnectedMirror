@@ -19,7 +19,7 @@ class database:
         if result == None:
             data = ['Bad','Data']
         else:
-            data = [['led_id', result[0]], ['red', result[1]], ['green', result[2]], ['blue', result[3]], ['white', result[4]], ['brightness', result[5]]]
+            data = [['led_id', result[0]], ['red', result[1]], ['green', result[2]], ['blue', result[3]]]
         jsonData = json.dumps(data)
         return jsonData
 
@@ -28,7 +28,7 @@ class database:
     def setLed(led_id, r, g, b, w, bri):
         db = MySQLdb.connect("localhost", "root", "mysql", "connected_mirror")
         cur = db.cursor()
-        cur.execute("INSERT INTO led_settings (led_id, red, green, blue, white, brightness) VALUES(" + str(led_id) + "," + str(r) + "," + str(g) + "," + str(b) + "," + str(w) + "," + str(bri) +")")
+        cur.execute("INSERT INTO led_settings (led_id, red, green, blue) VALUES(" + str(led_id) + "," + str(r) + "," + str(g) + "," + str(b) + ")")
         db.commit()
         db.close()
 
@@ -37,7 +37,7 @@ class database:
     def updateLed(led_id, r, g, b, w, bri):
         db = MySQLdb.connect("localhost", "root", "mysql", "connected_mirror")
         cur = db.cursor()
-        cur.execute("UPDATE led_settings SET red = " + str(r) + ", green = " + str(g) + ", blue = " + str(b) + ", white = " + str(w) + ", brightness = " + str(bri) + " WHERE led_id = " + str(led_id))        
+        cur.execute("UPDATE led_settings SET red = " + str(r) + ", green = " + str(g) + ", blue = " + str(b) + " WHERE led_id = " + str(led_id))        
         db.commit()
         db.close()
 
