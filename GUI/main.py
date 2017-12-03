@@ -1,11 +1,11 @@
-import json, socket, time, sys, GUIClient, speechMain, Tkinter
+import json, socket, time, sys, GUIClient, speechMain, 
 from multiprocessing import Process
-#import serial
+import serial
 
 
 class MainClient():
 
-    #ser = serial.Serial('/dev/ttyACM0', 9600)
+    ser = serial.Serial('/dev/ttyACM0', 9600)
     onOff = 1;
 
 
@@ -27,9 +27,10 @@ class MainClient():
             pass;
 
         
-    while 1:       
+Process(target= GUIClient.GUI()).start()
+ while 1:       
         Process(target= MainClient()).start()
-        Process(target= GUIClient.GUI()).start()
+        
    
 
 
