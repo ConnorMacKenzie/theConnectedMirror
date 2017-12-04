@@ -1,5 +1,8 @@
 import Tkinter as tk
 import time, socket, sys, time, json
+import __builtin__
+__builtin__.isWeather = 1
+__builtin__.isNews = 1
 
 class Client():
 
@@ -57,11 +60,9 @@ class Client():
 
 class GUI():
 
-    global isWeather = 1
-    global isNews = 1
     
     def startGUI(self):
-
+	
         #font = "Courier"
         font = "Nidus Sans"
         self.root = tk.Tk()
@@ -80,7 +81,7 @@ class GUI():
         self.updateClock()
         self.root.mainloop()
 
-    def voiceCMDs(self, voice):
+    '''def voiceCMDs(self, voice):
         if voice == 'news on':
             self.updateNews()
         if voice == 'news off':
@@ -90,7 +91,7 @@ class GUI():
             self.updateWeather()
         if voice == 'weather off':
             weatherdat = self.client.receiveData('weather off')
-	    self.N.set('weatherdat')
+	    self.N.set('weatherdat')'''
 
     def newsOff(self):
 	self.N.set(" ")

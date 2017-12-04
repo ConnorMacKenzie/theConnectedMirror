@@ -14,9 +14,7 @@ class serv:
 
     def start(self, local = '10.0.0.52', lPort = 50, remote = '10.0.0.52', rPort = 51):
         print("Starting UDP Server")
-
-	g = GUI()
-	g.startGUI()       
+       
 	
         #initialize socket addresses and ports
         localName = local
@@ -30,7 +28,9 @@ class serv:
 	localAddress = (localName, localPort)
         remoteAddress = (remoteName, remotePort)
         s.bind(localAddress)
-        while True:
+        g = GUI()
+	g.startGUI()
+	while True:
             notRec = True
 
             #while nothing is recieved, loop
@@ -47,7 +47,7 @@ class serv:
                     notRec = False
 
             if 'news off' in buf:
-                g.isNews = 0
+                isNews = 0
            
 
             elif 'weather' in buf:
