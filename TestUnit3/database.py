@@ -19,7 +19,7 @@ class Database:
         if result == None:
             data = ['Bad','Data']
         else:
-            data = [['led_id', result[0]], ['red', result[1]], ['green', result[2]], ['blue', result[3]]]
+            data = [['red', result[1]], ['green', result[2]], ['blue', result[3]]]
         jsonData = json.dumps(data)
         return jsonData
 

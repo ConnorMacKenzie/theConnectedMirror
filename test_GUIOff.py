@@ -1,4 +1,4 @@
-import socket
+import socket, time
 
 class SpeechCommand():
 
@@ -17,6 +17,24 @@ class SpeechCommand():
         self.remoteAddress = (self.remoteName, self.remotePort)
 
         field = 'news off'
+
+        self.s.sendto(field.encode('utf-8'), self.remoteAddress)
+
+        time.sleep(8)
+        
+        field = 'weather off'
+
+        self.s.sendto(field.encode('utf-8'), self.remoteAddress)
+
+        time.sleep(8)
+
+        field = 'news on'
+
+        self.s.sendto(field.encode('utf-8'), self.remoteAddress)
+
+        time.sleep(8)
+
+        field = 'weather on'
 
         self.s.sendto(field.encode('utf-8'), self.remoteAddress)
 

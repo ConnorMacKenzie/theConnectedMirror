@@ -1,4 +1,4 @@
-import json, StringIO, socket, sys, time, weather, news
+import json, StringIO, socket, sys, time, weather, news, database, serial
 
 #passed to the json encoder to check and use the serializing method if found, else returns an error
 class encoderClass(json.JSONEncoder):
@@ -26,6 +26,7 @@ class serv:
     def start(self, local = '10.0.0.52', lPort = 50, remote = '10.0.0.52', rPort = 51):
         
 	print("Starting UDP Server")
+	ser = serial.Serial('/dev/ttyACM0', 9600)
        
         #initialize socket addresses and ports
         localName = local
@@ -40,6 +41,7 @@ class serv:
         remoteAddress = (remoteName, remotePort)
         s.bind(localAddress)
 
+        db = database.Databade()
 	modules = Modules()
   
 	while True:
@@ -56,7 +58,7 @@ class serv:
                     break
                 #displays data received for validation
                 print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
-                if 'news' in buf or 'weather' in buf or 'modules' in buf:
+                if 'news' in buf or 'weather' in buf or 'modules' in buf or 'led' in buf:
                     notRec = False
 
             if 'news off' in buf:
@@ -67,6 +69,14 @@ class serv:
 		modules.setNews('on')
 	    elif 'weather on' in buf:
 		modules.setWeather('on')
+
+	    elif 'led on' in buf:
+                led = buf.split()
+                values = db.getLed(led[2])
+                ser.write(values.get('red'))
+                ser.write(values.get('green'))
+                ser.write(values.get('blue'))
+                
                 
             elif 'modules' in buf:
 		jsonModules = json.dumps(modules, cls = encoderClass)
