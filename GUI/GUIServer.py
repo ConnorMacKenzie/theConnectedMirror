@@ -30,10 +30,7 @@ class serv:
 	localAddress = (localName, localPort)
         remoteAddress = (remoteName, remotePort)
         s.bind(localAddress)
-    
-	g = GUIClient.GUI()
-	g.startGUI()
-	var1 = 1
+  
 	while True:
 	   
             notRec = True
@@ -45,8 +42,6 @@ class serv:
                 #recieves data from client and stores it in buf
                 buf, address = s.recvfrom(2048)
                 if not len(buf):
-		    if var1:
-			var1 = 0
                     break
                 #displays data received for validation
                 print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
