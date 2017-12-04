@@ -1,4 +1,4 @@
-python GUIServer.py&
-python GUIClient.py&
-python main.py&
+python GUIServer.py &
+python GUIClient.py &
+python main.py &
 
