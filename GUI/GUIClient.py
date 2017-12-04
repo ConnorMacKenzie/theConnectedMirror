@@ -61,7 +61,7 @@ class GUI():
 
     
     def startGUI(self):
-	time.sleep(3)
+	time.sleep(1)
         #font = "Courier"
         font = "Nidus Sans"
         self.isWeather = 1
@@ -70,11 +70,11 @@ class GUI():
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
 	self.client = Client()
-	self.W = tk.StringVar()
-	self.N = tk.StringVar()
+	self.W = '.'
+	self.N = '.'
 	self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
-	self.weatherLabel = tk.Label(self.root, textvariable = self.W, font = (font, 40), background = 'black', foreground = 'white')
-	self.newsLabel = tk.Label(self.root, textvariable = self.N, font = (font, 10), background = 'black', foreground = 'white')
+	self.weatherLabel = tk.Label(self.root, text = self.W, font = (font, 40), background = 'black', foreground = 'white')
+	self.newsLabel = tk.Label(self.root, text = self.N, font = (font, 10), background = 'black', foreground = 'white')
 	self.clockLabel.pack(side = 'top')
 	self.weatherLabel.pack(side = 'left')
 	self.newsLabel.pack(side = 'right')
@@ -85,12 +85,21 @@ class GUI():
 
     def modules(self):
         modules = self.client.recieveData('modules')
-        
+        if modules.get('news') == 'off':
+		self.newsOff()
+	if modules.get('weather') == 'off':
+		self.weatherOff()
+	if modules.get('news') == 'on':
+		self.updateNews()
+	if modules.get('weather') == 'on':
+		self.updateWeather()
+	self.root.after(2000, lambda: self.modules())
+
     def newsOff(self):
-	self.N.set(' ')
+	self.newsLabel.configure(text = ' ')
 
     def weatherOff(self):
-	self.W.set(' ')	        
+	self.weatherLabel.configure(text = ' ')
 
     def updateClock(self):
         timeString = time.strftime('%H:%M')
@@ -100,16 +109,16 @@ class GUI():
     def updateWeather(self):
         weatherData = self.client.recieveData('weather')
 	weatherString = weatherData.get('summary')
-        self.W.set(weatherString)
+        self.weatherLabel.configure(text = weatherString)
 
     def updateNews(self):
         newsData = self.client.recieveData('news')
-        articles = newsData.get('articles')
+	articles = newsData.get('articles')
         newsString = ' '
         for item in articles:
         	newsString += item['title']
                 newsString += "\n"
-        self.N.set(newsString)
+        self.newsLabel.configure(text = newsString)
         
 
     def updateAll(self):

@@ -1,4 +1,5 @@
 import json, StringIO, socket, sys, time, weather, news
+import GUIClient
 
 #passed to the json encoder to check and use the serializing method if found, else returns an error
 class encoderClass(json.JSONEncoder):
@@ -8,18 +9,6 @@ class encoderClass(json.JSONEncoder):
         else:
             raise TypeError
 
-
-class Modules:
-	def __init__(self):
-		self.news = 'on'
-		self.weather = 'on'
-	def setNews(self, onOff):
-		self.news = onOff
-	def setWeather(self, onOff):
-		self.weather = onOff
-	def serializable(self):
-		return self.__dict__
-
 class serv:
 
 
@@ -27,6 +16,8 @@ class serv:
         
 	print("Starting UDP Server")
        
+		
+
         #initialize socket addresses and ports
         localName = local
         localPort = lPort
@@ -38,10 +29,8 @@ class serv:
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 	localAddress = (localName, localPort)
         remoteAddress = (remoteName, remotePort)
-        s.bind(localAddress)
-
-	modules = Modules()
-  
+        s.bind(localAddress
+	var1 = 1
 	while True:
 	   
             notRec = True
@@ -53,25 +42,16 @@ class serv:
                 #recieves data from client and stores it in buf
                 buf, address = s.recvfrom(2048)
                 if not len(buf):
+		    if var1:
+			var1 = 0
                     break
                 #displays data received for validation
                 print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
-                if 'news' in buf or 'weather' in buf or 'modules' in buf:
+                if 'news' in buf or 'weather' in buf:
                     notRec = False
 
             if 'news off' in buf:
-                modules.setNews('off')
-	    elif 'weather off' in buf:
-		modules.setWeather('off')
-	    elif 'news on' in buf:
-		modules.setNews('on')
-	    elif 'weather on' in buf:
-		modules.setWeather('on')
-                
-            elif 'modules' in buf:
-		jsonModules = json.dumps(modules, cls = encoderClass)
-                s.sendto(jsonModules.encode('utf-8'), remoteAddress)
-            
+                g.newOff()
             elif 'weather' in buf:
 
                 weatherData = weather.getCurrentData()
