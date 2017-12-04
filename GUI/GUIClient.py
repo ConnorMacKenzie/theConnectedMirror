@@ -1,8 +1,7 @@
 import Tkinter as tk
 import time, socket, sys, time, json
 import __builtin__
-__builtin__.isWeather = 1
-__builtin__.isNews = 1
+
 
 class Client():
 
@@ -65,6 +64,8 @@ class GUI():
 	
         #font = "Courier"
         font = "Nidus Sans"
+        self.isWeather = 1
+        self.isNews = 1
         self.root = tk.Tk()
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
@@ -94,10 +95,10 @@ class GUI():
 	    self.N.set('weatherdat')'''
 
     def newsOff(self):
-	self.N.set(" ")
+	self.isNews = 0
 
     def weatherOff(self):
-	self.W.set(" ")	        
+	self.isWeather = 0	        
 
     def updateClock(self):
         timeString = time.strftime('%H:%M')

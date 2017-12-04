@@ -47,9 +47,7 @@ class serv:
                     notRec = False
 
             if 'news off' in buf:
-                isNews = 0
-           
-
+                g.newOff()
             elif 'weather' in buf:
 
                 weatherData = weather.getCurrentData()
