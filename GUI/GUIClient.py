@@ -57,7 +57,7 @@ class Client():
 
 class GUI():
 
-    def __init__(self):
+    def startGUI(self):
 
         #font = "Courier"
         font = "Nidus Sans"
@@ -75,8 +75,7 @@ class GUI():
         self.updateClock()
         self.root.mainloop()
 
-    def voiceCMDs(self):
-        voice = self.client.recieveStr()
+    def voiceCMDs(self, voice):
         if voice == 'news on':
             self.newsLabel.pack(side = 'right')
         if voice == 'news off':
@@ -85,7 +84,7 @@ class GUI():
             self.weatherLabel.pack(side = 'left')
         if voice == 'weather off':
             self.weatherLabel.pack_forget()
-        self.root.after(100)
+        
 
 
     def updateClock(self):
@@ -114,3 +113,4 @@ class GUI():
         self.root.after(1800000, lambda: self.updateAll())
 
 gui = GUI()
+gui.startGUI()
