@@ -1,5 +1,5 @@
 import Tkinter as tk
-import time, socket, sys, time, json, GUIServer
+import time, socket, sys, time, json
 
 class Client():
 
@@ -38,7 +38,7 @@ class Client():
     def recieveStr(self):
 
         #print ("Enter non-null weather pull request: ")
-        #sets the string to be sent as the next line in the terminal
+        #sets the string to be sent as tself.server.start('localhost', 53, '10.0.0.51', 52)he next line in the terminal
 
         #sends the next line in the terminal to the server socket
         #self.s.sendto(field.encode('utf-8'), self.remoteAddress)
@@ -64,8 +64,6 @@ class GUI():
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
         self.client = Client()
-        self.server = GUIServer.serv()
-        self.server.start('localhost', 53, '10.0.0.51', 52)
         self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
         self.weatherLabel = tk.Label(self.root, text = "", font = (font, 40), background = 'black', foreground = 'white')
         self.newsLabel = tk.Label(self.root, text = "", font = (font, 10), background = 'black', foreground = 'white')
@@ -86,6 +84,7 @@ class GUI():
             self.weatherLabel.pack(side = 'left')
         if voice is 'weather off':
             self.weatherLabel.pack_forget()
+        self.root.after(100)
 
 
     def updateClock(self):

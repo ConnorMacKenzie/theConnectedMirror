@@ -34,7 +34,7 @@ class serv:
                 #recieves data from client and stores it in buf
                 buf, address = s.recvfrom(2048)
                 if not len(buf):
-                    break
+                    breakright
                 #displays data received for validation
                 print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
                 if 'news' in buf or 'weather' in buf:
@@ -60,3 +60,6 @@ class serv:
 
         #closes the socket
         s.close()
+
+server = serv()
+server.start()
