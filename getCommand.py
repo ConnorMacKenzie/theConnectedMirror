@@ -3,7 +3,7 @@ import socket
 
 class SpeechCommand():
 
-    def __init__(self, local = 'localhost', localport = 22, remote = 'localhost', remoteport = 23):
+    def __init__(self, local = '10.0.0.51', localport = 50, remote = '10.0.0.52', remoteport = 51):
 
         #initializes socket addresses and ports
         self.localName = local
@@ -13,12 +13,12 @@ class SpeechCommand():
 
         #initializes sockets
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.localAddress = (self.localName, self.localPort)
         self.remoteAddress = (self.remoteName, self.remotePort)
-        self.s.bind(self.localAddress)
 
         while 1:
-            print self.getCommand(self)
+            self.getCommand(self)
 
     def sendData(self, field):
             self.s.sendto(field.encode('utf-8'), self.remoteAddress)
@@ -35,7 +35,7 @@ class SpeechCommand():
 
         print words
         
-        if words[0] != 'connected':
+        if words[0] != 'client':
             return
 
         for word in words:
@@ -43,7 +43,7 @@ class SpeechCommand():
                 isNews = True
             if word == 'weather':
                 isWeather = True
-            if word == 'LED':
+            if word == 'led':
                 isLED = True
 
         if isNews:
