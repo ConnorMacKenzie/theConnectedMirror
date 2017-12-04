@@ -46,9 +46,12 @@ class serv:
                 if 'news' in buf or 'weather' in buf:
                     notRec = False
 
-            if 'news on' in buf or 'news off' in buf or 'weather on' in buf or 'weather off' in buf or 'LED 1 on' in buf or 'LED 2 on' in buf or 'LED 3 on' in buf or 'LED 4 on' in buf or 'LED 5 on' in buf or 'LED off' in buf:
+            if 'news off' in buf:
+                g.isNews = 0
+                
+            '''if 'news on' in buf or 'news off' in buf or 'weather on' in buf or 'weather off' in buf or 'LED 1 on' in buf or 'LED 2 on' in buf or 'LED 3 on' in buf or 'LED 4 on' in buf or 'LED 5 on' in buf or 'LED off' in buf:
 		jsonDat = {}
-                s.sendto(jsonDat.encode('utf-8'),remoteAddress)
+                s.sendto(jsonDat.encode('utf-8'),remoteAddress)'''
 
             elif 'weather' in buf:
 
