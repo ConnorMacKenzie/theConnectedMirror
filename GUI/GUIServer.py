@@ -1,5 +1,5 @@
 import json, StringIO, socket, sys, time, weather, news
-from GUIClient import GUI
+import GUIClient
 
 #passed to the json encoder to check and use the serializing method if found, else returns an error
 class encoderClass(json.JSONEncoder):
@@ -44,7 +44,8 @@ class serv:
 
             if 'news on' in buf or 'news off' in buf or 'weather on' in buf or 'weather off' in buf or 'LED 1 on' in buf or 'LED 2 on' in buf or 'LED 3 on' in buf or 'LED 4 on' in buf or 'LED 5 on' in buf or 'LED off' in buf:
 
-                GUI.voiceCMDs(buf)
+		
+                c.voiceCMDs(buf)
 
             elif 'weather' in buf:
 
@@ -65,3 +66,4 @@ class serv:
 
 server = serv()
 server.start()
+

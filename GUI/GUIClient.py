@@ -112,5 +112,5 @@ class GUI():
         self.updateNews()
         self.root.after(1800000, lambda: self.updateAll())
 
-gui = GUI()
-gui.startGUI()
+g=GUI()
+g.startGUI()
