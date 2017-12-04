@@ -8,7 +8,7 @@ class Speech():
     @staticmethod
     def record():
         r = sr.Recognizer()
-        r.energy_threshhold = 3000
+        r.energy_threshhold = 5000
         with sr.Microphone() as source:
             print 'say something'
             try:

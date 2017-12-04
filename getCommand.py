@@ -64,15 +64,15 @@ class SpeechCommand():
             for word in words:
                 if word == 'on':
                     for word in words:
-                        if word == '1' or 'one':
+                        if word == '1' or word == 'one':
                             self.sendData('LED 1 on')
-                        if word == '2' or 'two':
+                        elif word == '2' or word == 'two' or word == 'to' or word == 'too':
                             self.sendData('LED 2 on')
-                        if word == '3' or 'three':
+                        elif word == '3' or word == 'three':
                             self.sendData('LED 3 on')
-                        if word == '4' or 'four':
+                        elif word == '4' or word == 'four' or word == 'for' or word == 'fore':
                             self.sendData('LED 4 on')
-                        if word == '5' or 'five':
+                        elif word == '5' or word == 'five':
                             self.sendData('LED 5 on')
                 elif word == 'off':
                     self.sendData('LED off')
