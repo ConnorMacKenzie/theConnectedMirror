@@ -16,6 +16,12 @@ class SpeechCommand():
         self.localAddress = (self.localName, self.localPort)
         self.remoteAddress = (self.remoteName, self.remotePort)
 
+        field = 'led on 1'
+
+        self.s.sendto(field.encode('utf-8'), self.remoteAddress)
+
+        time.sleep(8)
+        
         field = 'news off'
 
         self.s.sendto(field.encode('utf-8'), self.remoteAddress)
@@ -36,6 +42,6 @@ class SpeechCommand():
 
         field = 'weather on'
 
-        self.s.sendto(field.encode('utf-8'), self.remoteAddress)
+        self.s.sendto(field.encode('utf-8'), self.remoteAddress)SS
 
 SpeechCommand()

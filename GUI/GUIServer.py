@@ -72,7 +72,7 @@ class serv:
 
 	    elif 'led on' in buf:
                 led = buf.split()
-                values = db.getLed(led[2])
+                values = db.getLed(led[1])
                 ser.write(values.get('red'))
                 ser.write(values.get('green'))
                 ser.write(values.get('blue'))
