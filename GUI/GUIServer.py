@@ -15,8 +15,6 @@ class serv:
         
 	print("Starting UDP Server")
        
-		
-
         #initialize socket addresses and ports
         localName = local
         localPort = lPort
@@ -29,6 +27,8 @@ class serv:
 	localAddress = (localName, localPort)
         remoteAddress = (remoteName, remotePort)
         s.bind(localAddress)
+
+        modules = [['news', 'on'], ['weather', 'on']]
   
 	while True:
 	   
@@ -48,7 +48,13 @@ class serv:
                     notRec = False
 
             if 'news off' in buf:
-                break 
+                a = modules[0]
+                a[1] = 'off'
+                
+            elif 'modules' in buf:
+                jsonModules = json.dumps(modules)
+                s.sendto(jsonModules.encode('utf-8'), remoteAddress)
+            
             elif 'weather' in buf:
 
                 weatherData = weather.getCurrentData()

@@ -80,14 +80,17 @@ class GUI():
 	self.newsLabel.pack(side = 'right')
 	self.updateAll()
 	self.updateClock()
+	self.modules()
 	self.root.mainloop()
 
-
+    def modules(self):
+        modules = self.client.recieveData('modules')
+        
     def newsOff(self):
-	self.isNews = 0
+	self.N.set(' ')
 
     def weatherOff(self):
-	self.isWeather = 0	        
+	self.W.set(' ')	        
 
     def updateClock(self):
         timeString = time.strftime('%H:%M')
@@ -98,8 +101,6 @@ class GUI():
         weatherData = self.client.recieveData('weather')
 	weatherString = weatherData.get('summary')
         self.W.set(weatherString)
-        
- 
 
     def updateNews(self):
         newsData = self.client.recieveData('news')
@@ -108,7 +109,6 @@ class GUI():
         for item in articles:
         	newsString += item['title']
                 newsString += "\n"
-            #newsString = newsData.get('title') 
         self.N.set(newsString)
         
 
