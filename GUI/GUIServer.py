@@ -1,5 +1,5 @@
 import json, StringIO, socket, sys, time, weather, news
-from GUIClient import GUI
+import GUIClient
 
 #passed to the json encoder to check and use the serializing method if found, else returns an error
 class encoderClass(json.JSONEncoder):
@@ -13,9 +13,11 @@ class serv:
 
 
     def start(self, local = '10.0.0.52', lPort = 50, remote = '10.0.0.52', rPort = 51):
-        print("Starting UDP Server")
+        
+	print("Starting UDP Server")
        
-	
+		
+
         #initialize socket addresses and ports
         localName = local
         localPort = lPort
@@ -28,11 +30,14 @@ class serv:
 	localAddress = (localName, localPort)
         remoteAddress = (remoteName, remotePort)
         s.bind(localAddress)
-        g = GUI()
+    
+	g = GUIClient.GUI()
 	g.startGUI()
+	var1 = 1
 	while True:
+	   
             notRec = True
-
+		
             #while nothing is recieved, loop
             while notRec:
                 print("Waiting for Request on port %d : press Ctrl-C to stop" % localPort)
@@ -40,7 +45,9 @@ class serv:
                 #recieves data from client and stores it in buf
                 buf, address = s.recvfrom(2048)
                 if not len(buf):
-                    breakright
+		    if var1:
+			var1 = 0
+                    break
                 #displays data received for validation
                 print("Recieved %s bytes from %s '%s': " % (len(buf), address, buf))
                 if 'news' in buf or 'weather' in buf:

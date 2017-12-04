@@ -1,6 +1,6 @@
 import Tkinter as tk
 import time, socket, sys, time, json
-import __builtin__
+
 
 
 class Client():
@@ -64,35 +64,38 @@ class GUI():
 	
         #font = "Courier"
         font = "Nidus Sans"
+	print('0')
         self.isWeather = 1
         self.isNews = 1
+	print('1')
         self.root = tk.Tk()
+	print('2')
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
-        self.client = Client()
+        print('3')
+	self.client = Client()
+	print('4')
 	self.W = tk.StringVar()
 	self.N = tk.StringVar()
-        self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
-        self.weatherLabel = tk.Label(self.root, textvariable = self.W, font = (font, 40), background = 'black', foreground = 'white')
-        self.newsLabel = tk.Label(self.root, textvariable = self.N, font = (font, 10), background = 'black', foreground = 'white')
-        self.clockLabel.pack(side = 'top')
-        self.weatherLabel.pack(side = 'left')
-        self.newsLabel.pack(side = 'right')
-        self.updateAll()
-        self.updateClock()
-        self.root.mainloop()
+        print('5')
+	self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
+        print('6')
+	self.weatherLabel = tk.Label(self.root, textvariable = self.W, font = (font, 40), background = 'black', foreground = 'white')
+        print('7')
+	self.newsLabel = tk.Label(self.root, textvariable = self.N, font = (font, 10), background = 'black', foreground = 'white')
+        print('8')
+	self.clockLabel.pack(side = 'top')
+        print('9')
+	self.weatherLabel.pack(side = 'left')
+        print('10')
+	self.newsLabel.pack(side = 'right')
+        print('11')
+	print('12')
+	self.updateClock()
+        print('13')
+	self.root.mainloop()
+	print('14')	
 
-    '''def voiceCMDs(self, voice):
-        if voice == 'news on':
-            self.updateNews()
-        if voice == 'news off':
-            newsdat = self.client.recieveData('news off')
-	    self.N.set(newsdat)
-        if voice == 'weather on':
-            self.updateWeather()
-        if voice == 'weather off':
-            weatherdat = self.client.receiveData('weather off')
-	    self.N.set('weatherdat')'''
 
     def newsOff(self):
 	self.isNews = 0
@@ -106,17 +109,19 @@ class GUI():
         self.root.after(60000, lambda: self.updateClock())
 
     def updateWeather(self):
-        if isWeather:
+        if self.isWeather==1:
+	    print('11.25')
             weatherData = self.client.recieveData('weather')
-            weatherString = weatherData.get('summary')
+            print('11.3')
+	    weatherString = weatherData.get('summary')
         else:
             weatherString = ' ' 
         self.W.set(weatherString)
-        self.root.after(1000, lambda: self.updateWeather())
+        '''self.root.after(1000, lambda: self.updateWeather())'''
  
 
     def updateNews(self):
-        if isNews:
+        if self.isNews==1:
             newsData = self.client.recieveData('news')
             articles = newsData.get('articles')
             newsString = ''
@@ -127,9 +132,8 @@ class GUI():
         else:
             newsString = ' ' 
         self.N.set(newsString)
-        self.root.after(1000, lambda: self.updateNews())
+        '''self.root.after(1000, lambda: self.updateNews())'''
 
     def updateAll(self):
         self.updateWeather()
         self.updateNews()
-        '''self.root.after(1800000, lambda: self.updateAll())'''
