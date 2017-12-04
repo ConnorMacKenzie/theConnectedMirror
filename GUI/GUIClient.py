@@ -57,6 +57,9 @@ class Client():
 
 class GUI():
 
+    global isWeather = 1
+    global isNews = 1
+    
     def startGUI(self):
 
         #font = "Courier"
@@ -101,19 +104,28 @@ class GUI():
         self.root.after(60000, lambda: self.updateClock())
 
     def updateWeather(self):
-        weatherData = self.client.recieveData('weather')
-        weatherString = weatherData.get('summary')
+        if isWeather:
+            weatherData = self.client.recieveData('weather')
+            weatherString = weatherData.get('summary')
+        else:
+            weatherString = ' ' 
         self.W.set(weatherString)
+        self.root.after(1000, lambda: self.updateWeather())
+ 
 
     def updateNews(self):
-        newsData = self.client.recieveData('news')
-        articles = newsData.get('articles')
-        newsString = ''
-        for item in articles:
-            newsString += item['title']
-            newsString += "\n"
-        #newsString = newsData.get('title')
+        if isNews:
+            newsData = self.client.recieveData('news')
+            articles = newsData.get('articles')
+            newsString = ''
+            for item in articles:
+                newsString += item['title']
+                newsString += "\n"
+            #newsString = newsData.get('title')
+        else:
+            newsString = ' ' 
         self.N.set(newsString)
+        self.root.after(1000, lambda: self.updateNews())
 
     def updateAll(self):
         self.updateWeather()
