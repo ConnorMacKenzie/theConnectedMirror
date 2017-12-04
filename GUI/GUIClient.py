@@ -3,7 +3,7 @@ import time, socket, sys, time, json
 
 class Client():
 
-    def __init__(self, local = 'localhost', localport = 51, remote = 'localhost', remoteport = 50):
+    def __init__(self, local = '10.0.0.52', localport = 51, remote = '10.0.0.52', remoteport = 50):
 
         #initializes socket addresses and ports
         self.localName = local
@@ -13,7 +13,8 @@ class Client():
 
         #initializes sockets
         self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.localAddress = (self.localName, self.localPort)
+        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+	self.localAddress = (self.localName, self.localPort)
         self.remoteAddress = (self.remoteName, self.remotePort)
         self.s.bind(self.localAddress)
 
