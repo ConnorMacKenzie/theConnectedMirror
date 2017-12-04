@@ -61,7 +61,7 @@ class GUI():
 
     
     def startGUI(self):
-	
+	time.sleep(3)
         #font = "Courier"
         font = "Nidus Sans"
         self.isWeather = 1
@@ -78,6 +78,7 @@ class GUI():
 	self.clockLabel.pack(side = 'top')
 	self.weatherLabel.pack(side = 'left')
 	self.newsLabel.pack(side = 'right')
+	self.updateAll()
 	self.updateClock()
 	self.root.mainloop()
 
@@ -94,28 +95,22 @@ class GUI():
         self.root.after(60000, lambda: self.updateClock())
 
     def updateWeather(self):
-        if self.isWeather==1:
-            weatherData = self.client.recieveData('weather')
-	    weatherString = weatherData.get('summary')
-        else:
-            weatherString = ' ' 
-            self.W.set(weatherString)
-        '''self.root.after(1000, lambda: self.updateWeather())'''
+        weatherData = self.client.recieveData('weather')
+	weatherString = weatherData.get('summary')
+        self.W.set(weatherString)
+        
  
 
     def updateNews(self):
-        if self.isNews==1:
-            newsData = self.client.recieveData('news')
-            articles = newsData.get('articles')
-            newsString = ''
-            for item in articles:
-                newsString += item['title']
+        newsData = self.client.recieveData('news')
+        articles = newsData.get('articles')
+        newsString = ' '
+        for item in articles:
+        	newsString += item['title']
                 newsString += "\n"
-            #newsString = newsData.get('title')
-        else:
-            newsString = ' ' 
+            #newsString = newsData.get('title') 
         self.N.set(newsString)
-        '''self.root.after(1000, lambda: self.updateNews())'''
+        
 
     def updateAll(self):
         self.updateWeather()

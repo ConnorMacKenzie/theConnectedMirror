@@ -1,5 +1,4 @@
 import json, StringIO, socket, sys, time, weather, news
-import GUIClient
 
 #passed to the json encoder to check and use the serializing method if found, else returns an error
 class encoderClass(json.JSONEncoder):
@@ -49,7 +48,7 @@ class serv:
                     notRec = False
 
             if 'news off' in buf:
-                g.newOff()
+                break 
             elif 'weather' in buf:
 
                 weatherData = weather.getCurrentData()
