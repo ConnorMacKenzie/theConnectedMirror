@@ -60,41 +60,26 @@ class Client():
 class GUI():
 
     
-    def startGUI(self):
+    def __init__(self):
 	
         #font = "Courier"
         font = "Nidus Sans"
-	print('0')
         self.isWeather = 1
         self.isNews = 1
-	print('1')
         self.root = tk.Tk()
-	print('2')
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
-        print('3')
 	self.client = Client()
-	print('4')
 	self.W = tk.StringVar()
 	self.N = tk.StringVar()
-        print('5')
 	self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
-        print('6')
 	self.weatherLabel = tk.Label(self.root, textvariable = self.W, font = (font, 40), background = 'black', foreground = 'white')
-        print('7')
 	self.newsLabel = tk.Label(self.root, textvariable = self.N, font = (font, 10), background = 'black', foreground = 'white')
-        print('8')
 	self.clockLabel.pack(side = 'top')
-        print('9')
 	self.weatherLabel.pack(side = 'left')
-        print('10')
 	self.newsLabel.pack(side = 'right')
-        print('11')
-	print('12')
 	self.updateClock()
-        print('13')
 	self.root.mainloop()
-	print('14')	
 
 
     def newsOff(self):
@@ -110,13 +95,11 @@ class GUI():
 
     def updateWeather(self):
         if self.isWeather==1:
-	    print('11.25')
             weatherData = self.client.recieveData('weather')
-            print('11.3')
 	    weatherString = weatherData.get('summary')
         else:
             weatherString = ' ' 
-        self.W.set(weatherString)
+            self.W.set(weatherString)
         '''self.root.after(1000, lambda: self.updateWeather())'''
  
 
