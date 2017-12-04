@@ -10,7 +10,7 @@ class encoderClass(json.JSONEncoder):
 
 class serv:
 
-    def start(self, local = '10.0.0.52', lPort = 51, remote = '10.0.0.51', rPort = 50):
+    def start(self, local = 'localhost', lPort = 50, remote = 'localhost', rPort = 51):
         print("Starting UDP Server")
 
         #initialize socket addresses and ports

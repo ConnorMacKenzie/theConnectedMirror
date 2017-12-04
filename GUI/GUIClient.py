@@ -3,7 +3,7 @@ import time, socket, sys, time, json
 
 class Client():
 
-    def __init__(self, local = 'localhost', localport = 51, remote = '10.0.0.51', remoteport = 50):
+    def __init__(self, local = 'localhost', localport = 51, remote = 'localhost', remoteport = 50):
 
         #initializes socket addresses and ports
         self.localName = local
