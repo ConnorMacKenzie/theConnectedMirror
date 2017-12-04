@@ -1,9 +1,9 @@
 import Tkinter as tk
-import time, socket, sys, time, json
+import time, socket, sys, time, json, GUIServer
 
 class Client():
 
-    def __init__(self, local = 'localhost', localport = 22, remote = 'localhost', remoteport = 23):
+    def __init__(self, local = 'localhost', localport = 51, remote = '10.0.0.51', remoteport = 50):
 
         #initializes socket addresses and ports
         self.localName = local
@@ -35,6 +35,24 @@ class Client():
 
         return data
 
+    def recieveStr(self):
+
+        #print ("Enter non-null weather pull request: ")
+        #sets the string to be sent as the next line in the terminal
+
+        #sends the next line in the terminal to the server socket
+        #self.s.sendto(field.encode('utf-8'), self.remoteAddress)
+
+        #receives data from server and stores in buf
+        buf, address = self.s.recvfrom(2048)
+        #decodes utf-8 data to store json string
+        data = buf.decode('utf-8')
+
+        #decodes json string into python dictionary to enable manipulation and access
+        #data = json.loads(jsonData)
+
+        return data
+
 
 class GUI():
 
@@ -46,6 +64,8 @@ class GUI():
         self.root.attributes('-fullscreen', True)
         self.root.configure(background = 'black')
         self.client = Client()
+        self.server = GUIServer.serv()
+        self.server.start('localhost', 53, '10.0.0.51', 52)
         self.clockLabel = tk.Label(self.root, text = "", font = (font, 50), background = 'black', foreground = 'white')
         self.weatherLabel = tk.Label(self.root, text = "", font = (font, 40), background = 'black', foreground = 'white')
         self.newsLabel = tk.Label(self.root, text = "", font = (font, 10), background = 'black', foreground = 'white')
@@ -55,6 +75,18 @@ class GUI():
         self.updateAll()
         self.updateClock()
         self.root.mainloop()
+
+    def voiceCMDs(self):
+        voice = self.client.recieveStr()
+        if voice is 'news on':
+            self.newsLabel.pack(side = 'right')
+        if voice is 'news off':
+            self.newsLabel.pack_forget()
+        if voice is 'weather on':
+            self.weatherLabel.pack(side = 'left')
+        if voice is 'weather off':
+            self.weatherLabel.pack_forget()
+
 
     def updateClock(self):
         timeString = time.strftime('%H:%M:%S')

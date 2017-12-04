@@ -40,21 +40,23 @@ class serv:
                 if 'news' in buf or 'weather' in buf:
                     notRec = False
 
-            if 'weather' in buf:
+            if 'news on' in buf or 'news off' in buf or 'weather on' in buf or 'weather off' in buf or 'LED 1 on' in buf or 'LED 2 on' in buf or 'LED 3 on' in buf or 'LED 4 on' in buf or 'LED 5 on' in buf or 'LED off' in buf:
+
+                s.sendto(buf.encode('utf-8'), remoteAddress)
+
+            elif 'weather' in buf:
 
                 weatherData = weather.getCurrentData()
                 jsonWeather = json.dumps(weatherData, cls = encoderClass)
 
                 #sends JSON data on different free port encoded in utf-8
                 s.sendto(jsonWeather.encode('utf-8'), remoteAddress)
-            if 'news' in buf:
+            elif 'news' in buf:
                 newsData = news.newsData()
                 jsonNews = json.dumps(newsData, cls = encoderClass)
 
                 s.sendto(jsonNews.encode('utf-8'), remoteAddress)
-                
+
+
         #closes the socket
         s.close()
-
-server = serv()
-server.start()
