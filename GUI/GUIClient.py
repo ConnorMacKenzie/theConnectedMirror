@@ -77,13 +77,13 @@ class GUI():
 
     def voiceCMDs(self):
         voice = self.client.recieveStr()
-        if voice is 'news on':
+        if voice == 'news on':
             self.newsLabel.pack(side = 'right')
-        if voice is 'news off':
+        if voice == 'news off':
             self.newsLabel.pack_forget()
-        if voice is 'weather on':
+        if voice == 'weather on':
             self.weatherLabel.pack(side = 'left')
-        if voice is 'weather off':
+        if voice == 'weather off':
             self.weatherLabel.pack_forget()
         self.root.after(100)
 
