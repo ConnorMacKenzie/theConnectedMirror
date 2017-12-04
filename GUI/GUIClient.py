@@ -1,4 +1,4 @@
-import Tkinter as tk
+	import Tkinter as tk
 import time, socket, sys, time, json
 
 class Client():
@@ -111,6 +111,3 @@ class GUI():
         self.updateWeather()
         self.updateNews()
         self.root.after(1800000, lambda: self.updateAll())
-
-g=GUI()
-g.startGUI()

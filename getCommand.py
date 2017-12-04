@@ -3,7 +3,7 @@ import socket
 
 class SpeechCommand():
 
-    def __init__(self, local = '10.0.0.51', localport = 50, remote = '10.0.0.52', remoteport = 51):
+    def __init__(self, local = '10.0.0.51', localport = 51, remote = '10.0.0.52', remoteport = 50):
 
         #initializes socket addresses and ports
         self.localName = local
