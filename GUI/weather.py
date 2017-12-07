@@ -2,7 +2,7 @@ import forecastio, json, StringIO, socket, sys, time
 
 
 #when initialized, this class gets information on curent weather
-class getCurrentData:
+class GetCurrentData:
 
     #API key given by Forecast.io to access data
     apikey = "566169fcb4282ff1c9d716df2ccdfd90"
