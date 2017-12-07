@@ -1,7 +1,7 @@
 import json, StringIO, socket, sys, time, weather, news, database, serial
 
 #passed to the json encoder to check and use the serializing method if found, else returns an error
-class encoderClass(json.JSONEncoder):
+class EncoderClass(json.JSONEncoder):
     def default(self,o):
         if hasattr(o, 'serializable'):
             return o.serializable()
