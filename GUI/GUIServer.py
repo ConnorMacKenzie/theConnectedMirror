@@ -20,7 +20,7 @@ class Modules:
 	def serializable(self):
 		return self.__dict__
 
-class serv:
+class Serv:
 
 
     def start(self, local = '10.0.0.52', lPort = 50, remote = '10.0.0.52', rPort = 51):
