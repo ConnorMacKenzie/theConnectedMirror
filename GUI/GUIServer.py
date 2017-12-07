@@ -79,19 +79,19 @@ class Serv:
                 
                 
             elif 'modules' in buf:
-		jsonModules = json.dumps(modules, cls = encoderClass)
+		jsonModules = json.dumps(modules, cls = EncoderClass)
                 s.sendto(jsonModules.encode('utf-8'), remoteAddress)
             
             elif 'weather' in buf:
 
                 weatherData = weather.getCurrentData()
-                jsonWeather = json.dumps(weatherData, cls = encoderClass)
+                jsonWeather = json.dumps(weatherData, cls = EncoderClass)
 
                 #sends JSON data on different free port encoded in utf-8
                 s.sendto(jsonWeather.encode('utf-8'), remoteAddress)
             elif 'news' in buf:
                 newsData = news.newsData()
-                jsonNews = json.dumps(newsData, cls = encoderClass)
+                jsonNews = json.dumps(newsData, cls = EncoderClass)
 
                 s.sendto(jsonNews.encode('utf-8'), remoteAddress)
 
