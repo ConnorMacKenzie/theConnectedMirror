@@ -1,6 +1,6 @@
 import json, requests, socket, sys, time
 
-class newsData:
+class NewsData:
 
     def __init__(self):
         url = ('https://newsapi.org/v2/top-headlines?'
